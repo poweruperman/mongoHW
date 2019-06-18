@@ -1,11 +1,55 @@
 const { Scrap } = require('../models')
+const axios = require('axios')
+const cheerio = require('cheerio')
 
 module.exports = app => {
+    // Main page
+    app.get('/', (req, res) => {
+        // practice
+        axios.get('https://www.nytimes.com/')
+        .then(({ data}) => {
+            const $ = cheerio.load(data)
+            const tmp = []
+            $('span.balanceHeadline').each((i, elem) => {
+                tmp.push({
+                    tmp : $(elem).text()
+                })
+                res.render('index', {
+                    tmp : tmp
+                })
+            })
+        })
+        .catch(e => console.log(e))
+        // res.render('index', {
+        //     info : tmp
+        // })
+        
+    })
+    // Scrap
+    app.get('/scrap', (req, res) => {
+        axios.get('https://www.nytimes.com/')
+            .then(({ data}) => {
+                const $ = cheerio.load(data)
+                const tmp = []
+                $('span.balanceHeadline').each((i, elem) => {
+                    tmp.push({
+                        tmp : $(elem).text()
+                    })
+                    res.render('/scrap', {
+                        info : tmp
+                    })
+                })
+            })
+            .catch(e => console.log(e))
+
+    })
     // GET All posts
-    app.get('/posts', (req, res) => {
+    app.get('/recallPosts', (req, res) => {
         Scrap.find({}, (e, scraps) => {
             if (e) throw e
-            res.json(scraps)
+            res.render('recallPosts', {
+                posts : scraps
+            })
         })
     })
     // GET One post
