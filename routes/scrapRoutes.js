@@ -5,38 +5,35 @@ const cheerio = require('cheerio')
 module.exports = app => {
     // Main page
     app.get('/', (req, res) => {
-        // practice
-        axios.get('https://www.nytimes.com/')
-        .then(({ data}) => {
-            const $ = cheerio.load(data)
-            const tmp = []
-            $('span.balanceHeadline').each((i, elem) => {
-                tmp.push({
-                    tmp : $(elem).text()
+        const tmp = []
+        axios.get('https://reactjsnews.com/')
+            .then(({ data }) => {
+                const $ = cheerio.load(data)
+                $('div.post').each((i, elem) => {
+                    tmp.push({
+                        title: $(elem).children('a').children('h3').text(),
+                        summary: $(elem).children('p').text(),
+                        url: `https://reactjsnews.com${$(elem).children('a').attr('href')}`
+                    })
                 })
                 res.render('index', {
-                    tmp : tmp
+                    tmp
                 })
             })
-        })
-        .catch(e => console.log(e))
-        // res.render('index', {
-        //     info : tmp
-        // })
-        
+            .catch(e => console.log(e))
     })
-    // Scrap
+    Scrap
     app.get('/scrap', (req, res) => {
         axios.get('https://www.nytimes.com/')
-            .then(({ data}) => {
+            .then(({ data }) => {
                 const $ = cheerio.load(data)
                 const tmp = []
                 $('span.balanceHeadline').each((i, elem) => {
                     tmp.push({
-                        tmp : $(elem).text()
+                        tmp: $(elem).text()
                     })
                     res.render('/scrap', {
-                        info : tmp
+                        info: tmp
                     })
                 })
             })
@@ -48,7 +45,7 @@ module.exports = app => {
         Scrap.find({}, (e, scraps) => {
             if (e) throw e
             res.render('recallPosts', {
-                posts : scraps
+                posts: scraps
             })
         })
     })

@@ -1,6 +1,3 @@
-const axios = require('axios')
-const cheerio = require('cheerio')
-const db = require('mongojs')('scrap')
 const { join } = require('path')
 const express = require('express')
 const app = express()
