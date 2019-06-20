@@ -23,15 +23,19 @@
         </button>
     </div>
     <div class='body'>
-        <div class="mainBodyContent">
-            <div>
-                Scrap your article by clicking "Scrap New Article"
+        {{#each posts}}
+            <div class="articleBody">
+                <div class="articleTitle" >
+                    <a href={{URL}}>{{Headline}}</a>
+                </div>
+                <div class="articleSummary">
+                    {{Summary}}
+                </div>
+                <button class='deleteBtn' data-id={{id}}>
+                    Delete Article
+                </button>
             </div>
-            <br>
-            <div>
-                See your saved article from "Saved Articles"
-            </div>
-        </div>
+        {{/each}}
     </div>
     <div class='footer'>React JS Nnews Scraper using Express-Handlebars</div>
 </div>

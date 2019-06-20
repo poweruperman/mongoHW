@@ -5,48 +5,41 @@ const cheerio = require('cheerio')
 module.exports = app => {
     // Main page
     app.get('/', (req, res) => {
+        res.render('index')
+    })
+    app.get('/scrap', (req, res) => {
         const tmp = []
         axios.get('https://reactjsnews.com/')
             .then(({ data }) => {
                 const $ = cheerio.load(data)
                 $('div.post').each((i, elem) => {
                     tmp.push({
+                        index : i,
                         title: $(elem).children('a').children('h3').text(),
                         summary: $(elem).children('p').text(),
                         url: `https://reactjsnews.com${$(elem).children('a').attr('href')}`
                     })
                 })
-                res.render('index', {
+                res.render('scrap', {
                     tmp
                 })
             })
             .catch(e => console.log(e))
     })
-    Scrap
-    app.get('/scrap', (req, res) => {
-        axios.get('https://www.nytimes.com/')
-            .then(({ data }) => {
-                const $ = cheerio.load(data)
-                const tmp = []
-                $('span.balanceHeadline').each((i, elem) => {
-                    tmp.push({
-                        tmp: $(elem).text()
-                    })
-                    res.render('/scrap', {
-                        info: tmp
-                    })
-                })
-            })
-            .catch(e => console.log(e))
-
-    })
     // GET All posts
-    app.get('/recallPosts', (req, res) => {
+    app.get('/saved', (req, res) => {
         Scrap.find({}, (e, scraps) => {
             if (e) throw e
-            res.render('recallPosts', {
+            res.render('saved', {
                 posts: scraps
             })
+        })
+    })
+    // GET all post
+    app.get('/posts', (req, res) => {
+        Scrap.find({}, (e, scraps) => {
+            if (e) throw e
+            res.json(scraps)
         })
     })
     // GET One post
@@ -60,7 +53,7 @@ module.exports = app => {
     app.post('/posts', (req, res) => {
         Scrap.create(req.body, e => {
             if (e) throw e
-            res.sendStatus(200)
+            res.render('index')
         })
     })
     // UPDATE / PUT a post

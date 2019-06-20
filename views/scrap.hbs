@@ -1,7 +1,41 @@
-<div>
-    {{#each info}}
-        <div>
-            stuff here : {{this.info}}
+<div class='container'>
+    <div class='header'>
+        <div class='title'>Mongo Scraper</div>
+        <button class='Btn' id='HomeBtn'>
+            <a href="http://localhost:3000/">
+                Home
+            </a>
+        </button>
+        <button class='Btn' id='SavedBtn'>
+            <a href="http://localhost:3000/saved">
+                Saved Articles
+            </a>
+        </button>
+        <button class='Btn' id='ScrapBtn'>
+            <a href="http://localhost:3000/scrap">
+                Scrap New Article
+            </a>
+        </button>
+        <button class='Btn' id='ClearBtn'>
+            <a href="http://localhost:3000/">
+                Clear Articles
+            </a>
+        </button>
+    </div>
+    <div class='body'>
+        {{#each tmp}}
+        <div class='articleBody'>
+            <div class='articleTitle' data-index={{index}} id='Title{{index}}'>
+                <a href={{url}} id='Title{{index}}Content' data-url={{url}}>{{title}}</a>
+            </div>
+            <div class='articleSummary' data-index={{index}} id='Summary{{index}}'>
+                {{summary}}
+            </div>
+            <button class='articleBtn' data-index={{index}} id='ArticleBtn{{index}}'>
+                Save Article
+            </button>
         </div>
-    {{/each}}
+        {{/each}}
+    </div>
+    <div class='footer'>React JS Nnews Scraper using Express-Handlebars</div>
 </div>
