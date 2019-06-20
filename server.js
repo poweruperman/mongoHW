@@ -2,7 +2,7 @@ const { join } = require('path')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-const MONGODB_URI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URL : "mongodb://localhost/scraps_db"
+const MONGODB_URI = process.env.MONGODB_URL || "mongodb://localhost/scraps_db"
 require('dotenv').config()
 
 
