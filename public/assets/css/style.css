@@ -63,12 +63,28 @@
     width: 80vw;
 
 }
+.articleComment {
+    text-align: left;
+    width: 80vw;
+}
 .articleBtn {
     display: inline-block;
     background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.commentBtn{
+    display: inline-block;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -102,7 +118,17 @@
 #url {
 
 }
-
+.commentSection {
+    text-align: left;
+    width: 80vw;
+}
+.commentLabel {
+    text-align: left;
+    width: 80vw;
+}
+.commentInput {
+    width: 50vw;
+}
 
 .footer {
     height: 10vh;

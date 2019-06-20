@@ -31,6 +31,15 @@
                 <div class="articleSummary">
                     {{Summary}}
                 </div>
+                <br>
+                <div class="articleComment">
+                    Comments : {{Comments}}
+                </div>
+                <form class='commentSection'>
+                    <label for="comment" class='commentLabel'>Add Additional Comment</label>
+                    <input type="text" class='commentInput' id='comment{{id}}'>
+                    <button class='commentBtn' data-id={{id}}>Submit</button>
+                </form>
                 <button class='deleteBtn' data-id={{id}}>
                     Delete Article
                 </button>
